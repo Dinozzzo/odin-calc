@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(61, 61, 61);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,17 +14,60 @@ body {
 .bodyCalc {
   width: 575px;
   height: 800px;
-  background-color: antiquewhite;
+  background-color: #0e0e0ec2;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
 }
 
 .topCalc {
-  height: 150px;
-  margin: 25px;
-  background-color: aqua;
+  height: 30%;
+  margin: 25px 25px 0 25px;
+
+  border-radius: 15px;
 }
 
 .bottomCalc {
+  height: 100%;
+  margin: 25px;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 25px;
+  padding: 10px;
+
+  border-radius: 15px;
+}
+
+.btn0 {
+  grid-column: span 2;
+  border-radius: 75px;
+}
+
+button {
+  font-size: 30px;
+  color: #eeeeff;
+  font-weight: 530;
+  border-radius: 250px;
+  background-color: #2e2b2b;
+  border: 2px solid rgba(87, 76, 76, 0.336);
+}
+
+.btnDivide,
+.btnMultiply,
+.btnPlus {
+  color: rgb(235, 131, 34);
+  font-size: 35px;
+}
+
+.btnMinus {
+  color: rgb(235, 131, 34);
+  font-size: 45px;
+}
+
+.btnEqual {
+  background-color: rgb(235, 131, 34);
+  font-size: 40px;
+  font-weight: 700;
+  border: 3px solid rgb(168, 82, 2);
 }
