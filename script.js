@@ -26,3 +26,18 @@ function operate(operator, a, b) {
   if (operator === `/`) return divide(a, b);
   return `Invalid`;
 }
+
+let display = document.createElement("p");
+display.textContent = `0`;
+
+const buttons = document.querySelectorAll(".digit");
+
+buttons.forEach((button) =>
+  button.addEventListener(
+    "click",
+    () => (display.textContent = button.textContent)
+  )
+);
+
+const show = document.querySelector(".displayCalc");
+show.appendChild(display);

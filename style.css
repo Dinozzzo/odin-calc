@@ -18,16 +18,24 @@ body {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
+  border: 5px solid rgba(87, 76, 76, 0.336);
 }
 
-.topCalc {
+.displayCalc {
   height: 30%;
   margin: 25px 25px 0 25px;
-
+  padding: 20px;
   border-radius: 15px;
+  background-color: #0e0e0e73;
+  font-size: 50px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  color: #eeeeff;
+  border: 2px solid rgba(87, 76, 76, 0.336);
 }
 
-.bottomCalc {
+.keypadCalc {
   height: 100%;
   margin: 25px;
   display: grid;
@@ -39,13 +47,8 @@ body {
   border-radius: 15px;
 }
 
-.btn0 {
-  grid-column: span 2;
-  border-radius: 75px;
-}
-
 button {
-  font-size: 30px;
+  font-size: 35px;
   color: #eeeeff;
   font-weight: 530;
   border-radius: 250px;
@@ -53,19 +56,25 @@ button {
   border: 2px solid rgba(87, 76, 76, 0.336);
 }
 
-.btnDivide,
-.btnMultiply,
-.btnPlus {
+#ac {
+  background-color: rgb(122, 29, 29);
+  border: 3px solid rgba(71, 1, 1, 0.637);
+  font-weight: 600;
+}
+
+#btnDivide,
+#btnMultiply,
+#btnPlus {
   color: rgb(235, 131, 34);
   font-size: 35px;
 }
 
-.btnMinus {
+#btnMinus {
   color: rgb(235, 131, 34);
   font-size: 45px;
 }
 
-.btnEqual {
+#btnEqual {
   background-color: rgb(235, 131, 34);
   font-size: 40px;
   font-weight: 700;
