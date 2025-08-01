@@ -15,9 +15,7 @@ function divide(a, b) {
   return a / b;
 }
 
-let firstNum = 3;
-let operator = `+`;
-let nextNum = 5;
+let data = `0`;
 
 function operate(operator, a, b) {
   if (operator === `+`) return add(a, b);
@@ -28,16 +26,27 @@ function operate(operator, a, b) {
 }
 
 let display = document.createElement("p");
-display.textContent = `0`;
+display.textContent = data;
 
 const buttons = document.querySelectorAll(".digit");
 
 buttons.forEach((button) =>
-  button.addEventListener(
-    "click",
-    () => (display.textContent = button.textContent)
-  )
+  button.addEventListener("click", () => {
+    if (data === `0`) {
+      data = button.textContent;
+    } else {
+      data += button.textContent;
+    }
+    display.textContent = data;
+    console.log(data);
+  })
 );
+
+const erase = document.querySelector(".erase");
+erase.addEventListener("click", () => {
+  data = `0`;
+  display.textContent = data;
+});
 
 const show = document.querySelector(".displayCalc");
 show.appendChild(display);
