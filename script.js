@@ -15,11 +15,11 @@ function divide(a, b) {
   return a / b;
 }
 
-// let firstNum =
-// let operator =
-// let secondNum =
+let firstNum = null;
+let operateur = null;
+let secondNum = null;
 
-let data = `0`;
+let data = ``;
 
 function operate(operator, a, b) {
   if (operator === `+`) return add(a, b);
@@ -32,25 +32,33 @@ function operate(operator, a, b) {
 let display = document.createElement("p");
 display.textContent = data;
 
+const show = document.querySelector(".displayCalc");
+show.appendChild(display);
+
 const buttons = document.querySelectorAll(".digit");
+
+const erase = document.querySelector(".erase");
+erase.addEventListener("click", () => {
+  data = ``;
+  display.textContent = data;
+});
 
 buttons.forEach((button) =>
   button.addEventListener("click", () => {
-    if (data === `0`) {
-      data = button.textContent;
-    } else {
-      data += button.textContent;
-    }
+    data += button.textContent;
     display.textContent = data;
     console.log(data);
   })
 );
 
-const erase = document.querySelector(".erase");
-erase.addEventListener("click", () => {
-  data = `0`;
-  display.textContent = data;
-});
+const operators = document.querySelectorAll(".operator");
 
-const show = document.querySelector(".displayCalc");
-show.appendChild(display);
+operators.forEach((operator) =>
+  operator.addEventListener("click", () => {
+    operateur = operator.textContent;
+    firstNum = data;
+    data = ``;
+    console.log(operateur);
+    console.log(firstNum);
+  })
+);
