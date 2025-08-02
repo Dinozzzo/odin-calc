@@ -56,9 +56,17 @@ const operators = document.querySelectorAll(".operator");
 operators.forEach((operator) =>
   operator.addEventListener("click", () => {
     operateur = operator.textContent;
+    // display.textContent = data + operateur;
     firstNum = data;
     data = ``;
     console.log(operateur);
     console.log(firstNum);
   })
 );
+
+const equal = document.querySelector(".equal");
+
+equal.addEventListener("click", () => {
+  secondNum = data;
+  console.log(secondNum);
+});
