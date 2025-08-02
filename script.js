@@ -15,6 +15,10 @@ function divide(a, b) {
   return a / b;
 }
 
+// let firstNum =
+// let operator =
+// let secondNum =
+
 let data = `0`;
 
 function operate(operator, a, b) {
