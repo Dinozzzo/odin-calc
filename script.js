@@ -11,7 +11,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  if (b === 0) return `Can't divide by 0.`;
+  if (b === 0)
+    return `ERROR
+  `;
   return a / b;
 }
 
@@ -35,13 +37,15 @@ display.textContent = data;
 const show = document.querySelector(".displayCalc");
 show.appendChild(display);
 
-const buttons = document.querySelectorAll(".digit");
-
 // Variable working with AC button
 const erase = document.querySelector(".erase");
 erase.addEventListener("click", () => {
   data = ``;
   display.textContent = data;
+  erase.classList.add("clickedAc");
+  setTimeout(() => {
+    erase.classList.remove("clickedAc");
+  }, 125);
 });
 
 // Function showing numbers/operators in the display
@@ -54,35 +58,58 @@ function showDisplay() {
 }
 
 // Clicking on buttons make them works
+const buttons = document.querySelectorAll(".digit");
 buttons.forEach((button) =>
   button.addEventListener("click", () => {
     data += button.textContent;
     showDisplay();
-    console.log(data);
+    button.classList.add("clicked");
+    setTimeout(() => {
+      button.classList.remove("clicked");
+    }, 125);
   })
 );
 
-// Clicking on operators make them works
+// Clicking on operators make them works and operate the calculation as second operateur
 const operators = document.querySelectorAll(".operator");
 operators.forEach((operator) =>
   operator.addEventListener("click", () => {
-    operateur = operator.textContent;
-    firstNum = data;
-    data = ``;
-    showDisplay();
-    console.log(operateur);
-    console.log(firstNum);
+    if (firstNum && operateur && data) {
+      secondNum = data;
+      firstNum = Number(firstNum);
+      secondNum = Number(secondNum);
+      let result = operate(operateur, firstNum, secondNum);
+      firstNum = result;
+      data = ``;
+      secondNum = null;
+      operateur = operator.textContent;
+      display.textContent = result + operateur;
+    } else {
+      firstNum = data;
+      operateur = operator.textContent;
+      data = "";
+      display.textContent = firstNum + operateur;
+      operator.classList.add("clicked");
+      setTimeout(() => {
+        operator.classList.remove("clicked");
+      }, 125);
+    }
   })
 );
 
+// Operate the calculation and show the result
 const equal = document.querySelector(".equal");
-
 equal.addEventListener("click", () => {
   secondNum = data;
   firstNum = Number(firstNum);
   secondNum = Number(secondNum);
-  console.log(secondNum);
   let result = operate(operateur, firstNum, secondNum);
   display.textContent = result;
+  operateur = null;
   data = result;
+  firstNum = data;
+  equal.classList.add("clickedEqual");
+  setTimeout(() => {
+    equal.classList.remove("clickedEqual");
+  }, 125);
 });

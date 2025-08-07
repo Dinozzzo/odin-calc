@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  background-color: rgb(61, 61, 61);
+  background-color: rgb(75, 75, 75);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  border: 5px solid rgba(87, 76, 76, 0.336);
+  border: 12px solid rgba(61, 53, 53, 0.336);
 }
 
 .displayCalc {
@@ -43,7 +43,6 @@ body {
   grid-template-rows: repeat(4, 1fr);
   gap: 25px;
   padding: 10px;
-
   border-radius: 15px;
 }
 
@@ -54,6 +53,8 @@ button {
   border-radius: 250px;
   background-color: #2e2b2b;
   border: 2px solid rgba(87, 76, 76, 0.336);
+  text-shadow: -1.5px -1.5px 0 black, 1.5px -1.5px 0 black, -1.5px 1.5px 0 black,
+    1.5px 1.5px 0 black, 0px 0px 2px black;
 }
 
 #ac {
@@ -79,4 +80,19 @@ button {
   font-size: 40px;
   font-weight: 700;
   border: 3px solid rgb(168, 82, 2);
+}
+
+.clicked {
+  background-color: rgba(131, 131, 131, 0.336);
+  transform: scale(0.97);
+}
+
+#btnEqual.clickedEqual {
+  background-color: rgb(235, 158, 34);
+  transform: scale(0.97);
+}
+
+#ac.clickedAc {
+  background-color: rgb(155, 49, 49);
+  transform: scale(0.97);
 }
