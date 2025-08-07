@@ -34,6 +34,10 @@ function operate(operator, a, b) {
 let display = document.createElement("p");
 display.textContent = data;
 
+let displayTop = document.querySelector(".displayTop");
+let memory = ``;
+displayTop.textContent = memory;
+
 const show = document.querySelector(".displayCalc");
 show.appendChild(display);
 
@@ -74,6 +78,10 @@ buttons.forEach((button) =>
 const operators = document.querySelectorAll(".operator");
 operators.forEach((operator) =>
   operator.addEventListener("click", () => {
+    operateur = operator.textContent;
+    memory += data + operateur;
+    displayTop.textContent = memory;
+    console.log(memory);
     if (firstNum && operateur && data) {
       secondNum = data;
       firstNum = Number(firstNum);
