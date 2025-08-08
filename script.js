@@ -20,8 +20,9 @@ function divide(a, b) {
 let firstNum = null;
 let operateur = null;
 let secondNum = null;
-
 let data = ``;
+let memory = ``;
+let justCalculated = false;
 
 function operate(operator, a, b) {
   if (operator === `+`) return add(a, b);
@@ -35,24 +36,29 @@ let display = document.createElement("p");
 display.textContent = data;
 
 let displayTop = document.querySelector(".displayTop");
-let memory = ``;
 displayTop.textContent = memory;
 
 const show = document.querySelector(".displayCalc");
 show.appendChild(display);
 
-// Variable working with AC button
+// AC button
 const erase = document.querySelector(".erase");
 erase.addEventListener("click", () => {
   data = ``;
   display.textContent = data;
+  displayTop.textContent = ``;
+  firstNum = null;
+  secondNum = null;
+  oeprateur = null;
+  memory = ``;
+  justCalculated = false;
   erase.classList.add("clickedAc");
   setTimeout(() => {
     erase.classList.remove("clickedAc");
   }, 125);
 });
 
-// Function showing numbers/operators in the display
+// Update display
 function showDisplay() {
   if (operateur !== null) {
     display.textContent = firstNum + operateur + data;
@@ -65,6 +71,13 @@ function showDisplay() {
 const buttons = document.querySelectorAll(".digit");
 buttons.forEach((button) =>
   button.addEventListener("click", () => {
+    if (justCalculated) {
+      data = ``;
+      memory = ``;
+      displayTop.textContent = ``;
+      justCalculated = false;
+    }
+
     data += button.textContent;
     showDisplay();
     button.classList.add("clicked");
@@ -78,24 +91,36 @@ buttons.forEach((button) =>
 const operators = document.querySelectorAll(".operator");
 operators.forEach((operator) =>
   operator.addEventListener("click", () => {
-    operateur = operator.textContent;
-    memory += data + operateur;
-    displayTop.textContent = memory;
-    console.log(memory);
+    // Si on vient de faire un "=", on redémarre un calcul à partir du résultat affiché
+    if (justCalculated) {
+      operateur = operator.textContent;
+      memory = display.textContent + operateur;
+      displayTop.textContent = memory;
+      firstNum = display.textContent;
+      data = ``;
+      justCalculated = false;
+      display.textContent = firstNum + operateur;
+      return;
+    }
+
     if (firstNum && operateur && data) {
       secondNum = data;
       firstNum = Number(firstNum);
       secondNum = Number(secondNum);
       let result = operate(operateur, firstNum, secondNum);
-      firstNum = result;
+      memory += secondNum + operator.textContent;
       data = ``;
-      secondNum = null;
+      secondNum = ``;
+      displayTop.textContent = memory;
+      firstNum = result;
       operateur = operator.textContent;
       display.textContent = result + operateur;
     } else {
       firstNum = data;
       operateur = operator.textContent;
-      data = "";
+      memory += data + operateur;
+      displayTop.textContent = memory;
+      data = ``;
       display.textContent = firstNum + operateur;
       operator.classList.add("clicked");
       setTimeout(() => {
@@ -105,17 +130,25 @@ operators.forEach((operator) =>
   })
 );
 
-// Operate the calculation and show the result
+// 🟰 BOUTON ÉGAL
 const equal = document.querySelector(".equal");
 equal.addEventListener("click", () => {
+  if (!firstNum || !operateur || data === ``) return;
+
   secondNum = data;
   firstNum = Number(firstNum);
   secondNum = Number(secondNum);
   let result = operate(operateur, firstNum, secondNum);
+
   display.textContent = result;
+  displayTop.textContent = memory + secondNum + " =";
+
+  // Préparer pour le prochain calcul
   operateur = null;
   data = result;
   firstNum = data;
+  justCalculated = true;
+
   equal.classList.add("clickedEqual");
   setTimeout(() => {
     equal.classList.remove("clickedEqual");
